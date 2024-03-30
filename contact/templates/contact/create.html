@@ -11,21 +11,27 @@
       enctype="multipart/form-data"
     >
     {% csrf_token %}
-      <div class="form-content">
+    {% for field in form %}
+    <div class="form-content">
         <div class="form-group">
-          <label for="id_first_name">LABEL</label>
-          <input type="text" name="first_name" maxlength="255" id="id_first_name">
-        </div>
-      </div>
-      <div class="form-content">
-        <div class="form-group">
-          <label for="id_first_name">LABEL</label>
-          <input type="text" name="last_name" maxlength="255" id="id_first_name">
-        </div>
-      </div>
+          <label for="{{field.id_for_label}}">{{field.label}}</label>
+          {{field}}
+          {{field.errors}}
 
+        </div>
+      </div>
+      
+    {% endfor %}
+      
+      {% if form.non_fields_errors %}
+        <div class="form-content">
+            <div class="form-group">
+                {{form.non_fields_errors}}
+            </div>
+        </div>
+      {% endif %}
       <div class="form-content">
-        <div class="form-group">
+          <div class="form-group">
           <button class="btn" type="submit">Send</button>
         </div>
       </div>
