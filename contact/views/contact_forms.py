@@ -23,6 +23,13 @@ class ContactForm(forms.ModelForm):
                 code='invalid'
             )
         )
+        self.add_error(
+            'first_name',
+            ValidationError(
+                'MEnsagem de erro 2',
+                code='invalid'
+            )
+        )
         print(cleaned_data)
         return super().clean()
 
